@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkoutCode()
+                }
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                script {
+                    buildProject()
+                }
+            }
+        }
+        
+        stage('Run Tests') {
+            steps {
+                script {
+                    runUnitTests()
+                    runIntegrationTests()
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    deployArtifacts()
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            script {
+                performPostBuildActions()
+            }
+        }
+    }
+}
+
+def checkoutCode() {
+    // Common step: Checkout source code from version control
+    // Implement checkout logic here
+    echo "Checking out source code..."
+}
+
+def buildProject() {
+    // Common step: Build the project
+    // Implement build logic here
+    echo "Building the project..."
+}
+
+def runUnitTests() {
+    // Common step: Run unit tests
+    // Implement unit test logic here
+    echo "Running unit tests..."
+}
+
+def runIntegrationTests() {
+    // Common step: Run integration tests
+    // Implement integration test logic here
+    echo "Running integration tests..."
+}
+
+def deployArtifacts() {
+    // Common step: Deploy artifacts
+    // Implement deployment logic here
+    echo "Deploying artifacts..."
+}
+
+def performPostBuildActions() {
+    // Common post-build actions
+    // Implement post-build actions here
+    echo "Performing post-build actions..."
+}
+
